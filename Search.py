@@ -57,7 +57,7 @@ class Search():
             try:
                 #Gets the state of the checkboxes and then searches with the user input
                 if(self.chkVar1.get()):
-                    cur.execute("SELECT * FROM Instructor WHERE lastName LIKE ?", (self.userSearchCriteria,))
+                    cur.execute("SELECT * FROM Guest WHERE lastName LIKE ?", (self.userSearchCriteria,))
                     messagebox.showwarning("Query Results", cur.fetchall())
 
                 elif(self.chkVar2.get()):
