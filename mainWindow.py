@@ -14,22 +14,16 @@ cur = cxn.cursor()
 # start a try-except block to handle SQL-Exceptions
 # create the table and fill it with data
 try:
-    cur.execute('CREATE TABLE Instructor(roomID INTEGER PRIMARY KEY, firstName VARCHAR(50), lastName VARCHAR(50), address VARCHAR(50))')
-    cur.execute('CREATE TABLE Class(code VARCHAR(8) PRIMARY KEY, description VARCHAR(50), price FLOAT, instructorID INTEGER REFERENCES Instructor(roomID))')
-    cur.execute('CREATE TABLE Schedule(code VARCHAR(8) REFERENCES Class(code), Day TEXT, time TEXT)')
-    cur.execute('CREATE TABLE Student(id INTEGER PRIMARY KEY, firstName VARCHAR(50), lastName VARCHAR(50), address VARCHAR(50), amountDue FLOAT)')
-    cur.execute('CREATE TABLE ClassStudent(code VARCHAR(8) REFERENCES Class(code), sequence INTEGER, studentID INTEGER REFERENCES Student(id))')
+    cur.execute('CREATE TABLE Guest(roomNumberID INTEGER PRIMARY KEY, firstName VARCHAR(50), lastName VARCHAR(50), address VARCHAR(50))')
+    cur.execute('CREATE TABLE Schedule(roomNumberID INTEGER REFERENCES Guest(roomID), checkInDate TEXT, checkInDate TEXT , checkInTime TEXT, checkOutTime TEXT)')
 except sqlite3.OperationalError:
     print("The tables have been created already")
 
 # Create some test data
 try:
     def insert():
-        cur.execute('INSERT INTO Instructor VALUES(NULL, "Bob", "Smith", "1234 Street")')
-        cur.execute('INSERT INTO Class VALUES("Weight", "Lifting weights", 250.00, 1)')
-        cur.execute('INSERT INTO Schedule VALUES("Weight", "Monday", "19:00")')
-        cur.execute('INSERT INTO ClassStudent VALUES("Weight", 1, 1)')
-        cur.execute('INSERT INTO Student VALUES(NULL, "Jane", "Smith", "1500 Tree Rd.", 0)')
+        cur.execute('INSERT INTO Guest VALUES(NULL, "Bob", "Smith", "1234 Street")')
+        cur.execute('INSERT INTO Schedule VALUES(1, "05/13/15", "05/20/15" ,"18:00", "14:00")')
 except sqlite3.IntegrityError:
     print("Test data has been put in already")
 
@@ -39,12 +33,12 @@ class mainWindow():
 
             #sets window to master, sets title, and window size
             self.master = master
-            self.master.title("Class Manager")
+            self.master.title("Hotel Guestbook Application")
             self.master.geometry("230x150")
 
 #Declares and defines labels, buttons, and textboxes
             self.btnAddGuest = Button(self.master, text="Add Guest", width=13, command=self.addGuest)
-            self.btnDeleteGuest = Button(self.master, text="Delete Guest", width=13, command=self.deleteInstructor)
+            self.btnDeleteGuest = Button(self.master, text="Delete Guest", width=13, command=self.deleteGuest)
             self.btnSearch = Button(self.master, text="Search", width=13, command=self.search)
             self.btnQuit = Button(self.master, text="Quit", width=13, command=self.quit)
 
@@ -58,13 +52,13 @@ class mainWindow():
     def quit(self):
         self.master.destroy()
 
-    #Function for displaying the add instructor window
+    #Function for displaying the add guest window
     def addInstructor(self):
         #Sets the addInstructor class to root2 so it is displayed when Add Instructor button is clicked
         root2 = Toplevel(self.master)
         AddGuest(root2)
 
-    #Function for displaying the delete instructor window
+    #Function for displaying the delete guest window
     def deleteInstructor(self):
         #Sets the addInstructor class to root2 so it is displayed when Add Instructor button is clicked
         root2 = Toplevel(self.master)

@@ -8,7 +8,7 @@ cxn = sqlite3.connect('GuestDB')
 # initialize a cursor object to run execute commands on the connected database.
 cur = cxn.cursor()
 
-#Class for deleting Instructors
+#Class for deleting guests
 class DeleteGuest():
 
     #myMainWindowClass = MainWindow(empName)
@@ -43,7 +43,7 @@ class DeleteGuest():
         self.master.destroy()
 
     def delete(self):
-        # Delete instructors to the database
+        # Delete guests to the database
         last = self.lastName.get()
 
         if last == '':

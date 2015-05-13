@@ -62,10 +62,10 @@ class AddGuest():
         else:
             try:
                 cur.execute('INSERT INTO Guest VALUES(NULL, ?, ?, ?)', (first, last, address,))
-                messagebox.showwarning("New Instructor Added", "New Instructor successfully added")
+                messagebox.showwarning("New Guest Added", "New Guest successfully added")
 
             except sqlite3.IntegrityError:
-                messagebox.showwarning("New Instructor could not be added")
+                messagebox.showwarning("New Guest could not be added")
 
             finally:
                 #cur.close()
