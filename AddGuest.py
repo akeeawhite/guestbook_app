@@ -69,14 +69,16 @@ class AddGuest():
         checkOut = self.checkOutDate.get()
 
 
-        if first == '' or last == '' or address == '':
+        if first == '' or last == '' or address == '' or checkIn == '' or checkOut == '':
             messagebox.showwarning("Error", "Please fill in all empty text boxes!")
 
         else:
             try:
                 cur.execute('INSERT INTO Guest VALUES(NULL, ?, ?, ?, ?, ?)', (first, last, address, checkIn, checkOut))
                 messagebox.showwarning("New Guest Added", "New Guest successfully added")
-
+                # clear the textbox after insertion was successful
+                # set focus back to window
+                self.master.focus_force()
             except sqlite3.IntegrityError:
                 messagebox.showwarning("New Guest could not be added")
 

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="GuestDB" uuid="67990363-3436-48d0-9aa6-e87252788066">
+  <data-source name="SQLite -" uuid="fc6ada83-8a18-4758-8e4c-f97a69e41582">
     <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
     <table name="Guest" schema="" catalog="" type="TABLE">
-      <column name="roomNumberID" sqlType="INT" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
-      <column name="firstName" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="lastName" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="address" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="checkInDate" sqlType="DATE" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="checkOutDate" sqlType="DATE" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="roomNumberID" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="firstName" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="lastName" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="checkInDate" sqlType="DATE" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="checkOutDate" sqlType="DATE" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <primary-key columns="roomNumberID"/>
     </table>
   </data-source>

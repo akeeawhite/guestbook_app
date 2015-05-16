@@ -23,7 +23,7 @@ class DeleteGuest():
 
         #Creates labels for outputting the calculations
         self.lblLast = Label(self.master, text="Last Name: ")
-        txtBoxEmployeeLastName = Entry(self.master, textvariable=self.lastName)
+        txtBoxLastName = Entry(self.master, textvariable=self.lastName)
 
 
         #Close Button
@@ -34,7 +34,7 @@ class DeleteGuest():
 
         #Aligns the labels using the grid
         self.lblLast.grid(row=1, column=1, sticky=W)
-        txtBoxEmployeeLastName.grid(row=1, column=2)
+        txtBoxLastName.grid(row=1, column=2)
 
         self.btnDelete = Button(self.master, text="Delete", width=8, command=self.delete)
         self.btnDelete.grid(row=2, column=1)
@@ -51,9 +51,8 @@ class DeleteGuest():
 
         else:
             try:
-                cur.execute('DELETE FROM Guest WHERE lastName = ?', (last,))
+                cur.execute('DELETE FROM Guest WHERE lastName = ?', (last))
                 messagebox.showwarning("Guest Deleted", " Guest successfully deleted")
-
             except sqlite3.Error as e:
                 messagebox.showwarning(e)
 
