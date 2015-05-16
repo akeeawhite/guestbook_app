@@ -22,13 +22,11 @@ class Search():
         self.userSearchInput = StringVar()
         self.chkVar1 = IntVar()
         self.chkVar2 = IntVar()
-        self.chkVar3 = IntVar()
 
         #Widgets
-        self.chkBtnInstructorName = Checkbutton(self.master, text="Instructor Last Name", variable=self.chkVar1, justify=LEFT)
-        self.chkBtnClassName = Checkbutton(self.master, text="Class Name", variable=self.chkVar2, justify=LEFT)
-        self.chkBtnClassDay = Checkbutton(self.master, text="Class Day", variable=self.chkVar3, justify=LEFT)
-        self.lblSearchInformation = Label(self.master, text="Search For Instructor, Classes, or schedules")
+        self.chkBtnInstructorName = Checkbutton(self.master, text="Guest Last Name", variable=self.chkVar1, justify=LEFT)
+        self.chkBtnClassName = Checkbutton(self.master, text="Guest Room ID", variable=self.chkVar2, justify=LEFT)
+        self.lblSearchInformation = Label(self.master, text="Search For Guest or Guest Room ID")
         self.lblSearch = Label(self.master, text="Search: ")
         self.txtBoxSearch = Entry(self.master, textvariable=self.userSearchInput)
 
@@ -41,7 +39,6 @@ class Search():
         self.lblSearchInformation.grid(row=1, columnspan=1, sticky=W)
         self.chkBtnInstructorName.grid(row=2, columnspan=1, sticky=W)
         self.chkBtnClassName.grid(row=3, columnspan=1, sticky=W)
-        self.chkBtnClassDay.grid(row=4, columnspan=1, sticky=W)
         self.lblSearch.grid(row=5, columnspan=1, sticky=W)
         self.txtBoxSearch.grid(row=6, columnspan=1, sticky=W)
         self.btnSearch.grid(row=7, columnspan=1, sticky=W)
@@ -61,12 +58,9 @@ class Search():
                     messagebox.showwarning("Query Results", cur.fetchall())
 
                 elif(self.chkVar2.get()):
-                    cur.execute("SELECT * FROM Class WHERE code LIKE ?", (self.userSearchCriteria,))
+                    cur.execute("SELECT * FROM Guest WHERE checkInDate LIKE ?", (self.userSearchCriteria,))
                     messagebox.showwarning("Query Results", cur.fetchall())
 
-                elif(self.chkVar3.get()):
-                    cur.execute("SELECT * FROM Schedule WHERE Day LIKE ?", (self.userSearchCriteria,))
-                    messagebox.showwarning("Query Results", cur.fetchall())
 
             except sqlite3.IntegrityError:
                 messagebox.showwarning("Search Error", "No matches could be found")

@@ -17,35 +17,45 @@ class AddGuest():
         #creates master window for calculation window, changes title, and sets size
         self.master = master
         self.master.title("Add Guest")
-        self.master.geometry("250x140")
+        self.master.geometry("250x180")
 
         self.firstName = StringVar()
         self.lastName = StringVar()
         self.address = StringVar()
+        self.checkInDate = StringVar()
+        self.checkOutDate = StringVar()
 
         #Creates labels for outputting the calculations
         self.lblFirst = Label(self.master, text="First Name: ")
-        txtBoxEmployeeFirstName = Entry(self.master, textvariable=self.firstName)
+        txtBoxFirstName = Entry(self.master, textvariable=self.firstName)
         self.lblLast = Label(self.master, text="Last Name: ")
-        txtBoxEmployeeLastName = Entry(self.master, textvariable=self.lastName)
+        txtBoxLastName = Entry(self.master, textvariable=self.lastName)
         self.lblAddress = Label(self.master, text="Address: ")
-        txtBoxEmployeeAddress = Entry(self.master, textvariable=self.address)
+        txtBoxAddress = Entry(self.master, textvariable=self.address)
+        self.lblCheckIn = Label(self.master, text="Check In Date: ")
+        txtBoxCheckIn = Entry(self.master, textvariable=self.checkInDate)
+        self.lblCheckOut = Label(self.master, text="Check Out Date: ")
+        txtBoxCheckOut = Entry(self.master, textvariable=self.checkOutDate)
 
         #Close Button
         self.btnClose = Button(self.master, text="Close", width=8, command=self.quit)
 
         #Aligns button in grid
-        self.btnClose.grid(row=5, column=2)
+        self.btnClose.grid(row=7, column=2)
 
         #Aligns the labels using the grid
         self.lblFirst.grid(row=1, column=1, sticky=W)
-        txtBoxEmployeeFirstName.grid(row=1, column=2, sticky=E)
+        txtBoxFirstName.grid(row=1, column=2, sticky=E)
         self.lblLast.grid(row=2, column=1, sticky=W)
-        txtBoxEmployeeLastName.grid(row=2, column=2)
+        txtBoxLastName.grid(row=2, column=2)
         self.lblAddress.grid(row=3, column=1, sticky=W)
-        txtBoxEmployeeAddress.grid(row=3, column=2)
+        txtBoxAddress.grid(row=3, column=2)
+        self.lblCheckIn.grid(row=4, column=1, sticky=W)
+        txtBoxCheckIn.grid(row=4, column=2, sticky=E)
+        self.lblCheckOut.grid(row=5, column=1, sticky=W)
+        txtBoxCheckOut.grid(row=5, column=2)
         self.btnAdd = Button(self.master, text="Add", width=8, command=self.add)
-        self.btnAdd.grid(row=4, column=2)
+        self.btnAdd.grid(row=6, column=2)
 
     def quit(self):
         self.master.destroy()
@@ -55,19 +65,20 @@ class AddGuest():
         first = self.firstName.get()
         last = self.lastName.get()
         address = self.address.get()
+        checkIn = self.checkInDate.get()
+        checkOut = self.checkOutDate.get()
+
 
         if first == '' or last == '' or address == '':
             messagebox.showwarning("Error", "Please fill in all empty text boxes!")
 
         else:
             try:
-                cur.execute('INSERT INTO Guest VALUES(NULL, ?, ?, ?)', (first, last, address,))
+                cur.execute('INSERT INTO Guest VALUES(NULL, ?, ?, ?, ?, ?)', (first, last, address, checkIn, checkOut))
                 messagebox.showwarning("New Guest Added", "New Guest successfully added")
 
             except sqlite3.IntegrityError:
                 messagebox.showwarning("New Guest could not be added")
 
             finally:
-                #cur.close()
                 cxn.commit()
-                #cxn.close()

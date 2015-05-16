@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="146838354">
+  <component name="DataSourceManagerImpl" format="xml" hash="653604691">
     <data-source source="LOCAL" name="GuestDB" uuid="67990363-3436-48d0-9aa6-e87252788066">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/GuestDB</jdbc-url>
       <libraries />
     </data-source>
   </component>

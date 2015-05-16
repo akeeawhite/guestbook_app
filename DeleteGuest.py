@@ -58,6 +58,4 @@ class DeleteGuest():
                 messagebox.showwarning(e)
 
             finally:
-                #cur.close()
                 cxn.commit()
-                #cxn.close()
