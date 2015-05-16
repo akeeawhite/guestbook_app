@@ -20,13 +20,9 @@ class Search():
 
         #Sets the string variable and checkBox variables
         self.userSearchInput = StringVar()
-        self.chkVar1 = IntVar()
-        self.chkVar2 = IntVar()
 
         #Widgets
-        self.chkBtnInstructorName = Checkbutton(self.master, text="Guest Last Name", variable=self.chkVar1, justify=LEFT)
-        self.chkBtnClassName = Checkbutton(self.master, text="Guest Room ID", variable=self.chkVar2, justify=LEFT)
-        self.lblSearchInformation = Label(self.master, text="Search For Guest or Guest Room ID")
+        self.lblSearchInformation = Label(self.master, text="Search For Guest Last Name")
         self.lblSearch = Label(self.master, text="Search: ")
         self.txtBoxSearch = Entry(self.master, textvariable=self.userSearchInput)
 
@@ -37,8 +33,6 @@ class Search():
 
         #Aligns the labels using the grid
         self.lblSearchInformation.grid(row=1, columnspan=1, sticky=W)
-        self.chkBtnInstructorName.grid(row=2, columnspan=1, sticky=W)
-        self.chkBtnClassName.grid(row=3, columnspan=1, sticky=W)
         self.lblSearch.grid(row=5, columnspan=1, sticky=W)
         self.txtBoxSearch.grid(row=6, columnspan=1, sticky=W)
         self.btnSearch.grid(row=7, columnspan=1, sticky=W)
@@ -52,15 +46,14 @@ class Search():
             messagebox.showerror("Entry Error", "Textbox cannot be empty")
         else:
             try:
-                #Gets the state of the checkboxes and then searches with the user input
-                if(self.chkVar1.get()):
-                    cur.execute("SELECT * FROM Guest WHERE lastName LIKE ?", (self.userSearchCriteria,))
-                    messagebox.showwarning("Query Results", cur.fetchall())
-
-                elif(self.chkVar2.get()):
-                    cur.execute("SELECT * FROM Guest WHERE checkInDate LIKE ?", (self.userSearchCriteria,))
-                    messagebox.showwarning("Query Results", cur.fetchall())
-
+                    guestList = []
+                    cur.execute("SELECT * FROM Guest WHERE lastName LIKE ?", (self.userSearchCriteria + "%",))
+                    for info in cur.fetchall():
+                        guest = "Room Number ID: " + str(info[0]) + " Name: " + info[1] + " " + info[2] + \
+                                     "Address: " + info[3] + " Check In Date: " + info[4] + " Check Out Date: " + info[5]
+                        guestList.append(guest)
+                    msg = "\n".join(guestList)
+                    messagebox.showinfo("Query Results", msg)
 
             except sqlite3.IntegrityError:
                 messagebox.showwarning("Search Error", "No matches could be found")
